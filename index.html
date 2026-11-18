@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACTIVIDAD 2.2.2.1 // Campos de Direcciones - Héctor Ángel Gabriel Riva Palacio Banda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- FONDO GLOBAL DE LLUVIA DE CARACTERES EN TODA LA PÁGINA -->
+  <canvas id="global-matrix-canvas"></canvas>
+
+  <!-- INTRO CINEMATOGRÁFICA: CÍRCULO HUD -> CONTRACCIÓN + TEMBLOR -> EXPLOSIÓN EN GRANITOS -> LLUVIA -->
+  <div id="intro-overlay" class="intro-overlay">
+    <canvas id="intro-fx-canvas"></canvas>
+    <div id="hud-loader" class="hud-loader">
+      <svg id="hud-svg" viewBox="0 0 320 320" class="hud-svg">
+        <g id="ring-outer-ticks"></g>
+        <circle cx="160" cy="160" r="118" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5" stroke-dasharray="14 8" class="spin-slow" />
+        <circle cx="160" cy="160" r="105" fill="none" stroke="#00ff88" stroke-width="3.5" stroke-dasharray="130 90 40 90" stroke-linecap="round" class="spin-med-ccw" />
+        <circle cx="160" cy="160" r="90" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="85 60 25 140" class="spin-med-cw" />
+        <circle cx="160" cy="160" r="76" fill="none" stroke="#00ff88" stroke-width="4" stroke-dasharray="180 120" class="spin-fast-cw" />
+        <circle cx="160" cy="160" r="24" fill="rgba(0,255,136,0.14)" stroke="#ffffff" stroke-width="2" />
+      </svg>
+      <div class="loader-readout">
+        <span id="loader-status">INICIALIZANDO SISTEMA EDO...</span>
+        <span id="loader-pct">0%</span>
+      </div>
+    </div>
+    <button id="skip-intro" class="skip-btn">[ OMITIR INTRO &gt;&gt; ]</button>
+  </div>
+
+  <!-- ENCABEZADO GRANDE SIN RECUADRO (TEXTO FLOTANDO SOBRE LA LLUVIA) -->
+  <header class="hero-banner" id="hero-banner">
+    <div class="hero-content">
+      <div class="top-bar-controls">
+        <span class="sys-badge">INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN E INNOVACIÓN DIGITAL</span>
+        <div class="top-btns">
+          <button id="btn-open-qr" class="cyber-btn-outline">📱 VER CÓDIGO QR (GITHUB)</button>
+          <button id="replay-intro-btn" class="cyber-btn-outline">↻ REPETIR INTRO</button>
+        </div>
+      </div>
+
+      <div class="floating-header-text">
+        <div class="chevron-row">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <p class="career-title">INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN E INNOVACIÓN DIGITAL</p>
+        <h1>ACTIVIDAD 2.2.2.1</h1>
+        <h2>CAMPOS DE DIRECCIONES Y FAMILIA DE CURVAS SOLUCIÓN</h2>
+
+        <p class="hero-desc">
+          Grafique el campo de direcciones o líneas de flujo de la familia de curvas derivadas de solución de las Ecuaciones Diferenciales mostradas.
+        </p>
+
+        <!-- DATOS DEL ALUMNO, GRUPO Y PROFESOR FLOTANDO -->
+        <div class="academic-meta-floating">
+          <div class="meta-item">
+            <span class="lbl">ALUMNO:</span>
+            <span class="val">Héctor Ángel Gabriel Riva Palacio Banda</span>
+          </div>
+          <span class="meta-sep">//</span>
+          <div class="meta-item">
+            <span class="lbl">GRUPO:</span>
+            <span class="val highlight-green">141</span>
+          </div>
+          <span class="meta-sep">//</span>
+          <div class="meta-item">
+            <span class="lbl">DOCENTE:</span>
+            <span class="val">García Lara Javier</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="#enunciado-1" class="scroll-indicator">
+        <span>DESLIZA HACIA ABAJO PARA EXPLORAR LOS 4 ENUNCIADOS</span>
+        <div class="arrow-down">▼</div>
+      </a>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL VERTICAL: CADA ENUNCIADO CON SU GRÁFICA INTERACTIVA Y FUNCIONES -->
+  <main class="main-container" id="models-feed">
+    <!-- Se generan dinámicamente los 4 bloques completos -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="hud-footer">
+    <p>
+      <strong>Ingeniería en Tecnologías de la Información e Innovación Digital</strong><br>
+      Alumno: <strong>Héctor Ángel Gabriel Riva Palacio Banda</strong> — Grupo: <strong>141</strong> — Docente: <strong>García Lara Javier</strong>
+    </p>
+    <button id="btn-footer-qr" class="cyber-btn-outline">GENERAR / CONFIGURAR CÓDIGO QR PARA GITHUB</button>
+  </footer>
+
+  <!-- MODAL DE CÓDIGO QR PARA EL PROFESOR -->
+  <div id="qr-modal" class="modal-backdrop hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>CÓDIGO QR PARA EJECUTAR EN GITHUB PAGES</h3>
+        <button id="btn-close-qr" class="close-modal">✕</button>
+      </div>
+      <p class="modal-help">
+        1. Sube esta carpeta a tu repositorio en <strong>GitHub</strong> y activa <strong>GitHub Pages</strong>.<br>
+        2. Pega el enlace de tu página aquí y el código QR se actualizará al instante para que el profesor lo escanee o abra en su computadora:
+      </p>
+      <div class="qr-input-group">
+        <input type="text" id="github-url-input" placeholder="https://tu-usuario.github.io/actividad-2.2.2.1/" />
+        <button id="btn-update-qr" class="cyber-btn-solid">ACTUALIZAR QR</button>
+      </div>
+      <div class="qr-display">
+        <canvas id="qr-canvas" width="220" height="220"></canvas>
+        <span id="qr-url-caption" class="qr-caption"></span>
+        <button id="btn-download-qr" class="cyber-btn-outline">⬇ DESCARGAR IMAGEN QR (.PNG)</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
